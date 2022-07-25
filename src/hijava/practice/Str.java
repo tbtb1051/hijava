@@ -7,7 +7,7 @@ public class Str {
 		byte b = 'A';
 		System.out.println(c);
 		System.out.println((int)c);
-		System.out.println(b);
+//		System.out.println(b);
 	}
 
 }
