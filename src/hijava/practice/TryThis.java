@@ -3,21 +3,18 @@ package hijava.practice;
 public class TryThis {
 
 	public static void main(String[] args) {
-		int sum = 0;
 		
-		for(int i = 1; i <= 100; i++) {
-			for(int j = 1; j <= i; j++) {
-				
-				if(i % j == 0) {
-					if(i == j) {
-						sum = sum + i;
-					}
-					break;
-				}
-			}
-			
+		int num = 10;
+		for(int i = 0; i <= num; i++) {
+			System.out.print(fibo(i) + " ");
 		}
-		System.out.println(sum);
-	}
+		}
 
+	private static int fibo(int num) {
+		if(num <= 1) return num;
+		
+		return fibo(num-1) + fibo(num-2);
+	}
 }
+
+

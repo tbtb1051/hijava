@@ -3,6 +3,14 @@ package hijava.practice;
 public class Prime {
 
 	public static void main(String[] args) {
+		
+		if(args.length > 0) {
+			for (int i = 0; i < args.length; i++) {
+				System.out.println("args[" + i + "] = " + args[i]);
+				
+			}
+		} 
+		
 		int total = 0;
 		
 		for (int num = 2; num <= 100; num++) {
@@ -11,8 +19,6 @@ public class Prime {
 
 			if(isPrimeNum)
 				total += num;
-			else
-				System.out.println(num + " is Not Prime Number!!");
 		}	
 		System.out.println("1부터 100까지 숫자 중 소수의 합은 : " + total);
    	
