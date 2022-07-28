@@ -14,7 +14,7 @@ public class Arr {
 		int len = people.length;
 		for(int i = 0; i < len; i++) {
 			Man m = new Man("김" + (i + 1) + "수");
-			people[i] = m;
+			people[i] = m; 
 		}
 		
 		for(Man man : people) {
