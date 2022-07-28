@@ -4,16 +4,19 @@ public class TryThis {
 
 	public static void main(String[] args) {
 		
-		int num = 10;
-		for(int i = 0; i <= num; i++) {
-			System.out.print(fibo(i) + " ");
-		}
-		}
-
-	private static int fibo(int num) {
-		if(num <= 1) return num;
+		Man hong = new Man("hong");
+	
+		hong.buyCoffee(1);
+		hong.buyDonut(2);
+		System.out.println(hong.toString());
 		
-		return fibo(num-1) + fibo(num-2);
+		Man john = new Man("john");
+		
+		john.buyCoffee(2);
+		john.buyDonut(1);
+		System.out.println(john.toString());
+		
+		
 	}
 }
 
