@@ -3,7 +3,7 @@ package hijava.practice;
 public class Man {
 	public static final int COFFEE = 3000;
 	public static final int DONUT = 2500;
-	
+
 	private String name; // 이름
 	private int amount; // 잔액
 
@@ -14,6 +14,10 @@ public class Man {
 	public Man(String name) {
 		this(); // 생성자 부르는 명령어. 위의 잔액 만원은 한번 더 쓰지않고 생성자 함수를 부른다. (항상 첫번째 줄에 있어야 한다.)
 		this.name = name;
+	}
+
+	public void sayHello() {
+		System.out.println("안녕하세요, 제 이름은 " + this.getName() + "입니다.");
 	}
 
 	public String getName() {
@@ -31,7 +35,6 @@ public class Man {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
-
 
 	@Override
 	public String toString() {
@@ -61,7 +64,6 @@ public class Man {
 		hong.buyCoffee(1);
 		hong.buyDonut(2);
 		System.out.println(hong);
-		
 
 		Man john = new Man("john");
 
@@ -69,4 +71,5 @@ public class Man {
 		john.buyDonut(1);
 		System.out.println(john);
 	}
+
 }

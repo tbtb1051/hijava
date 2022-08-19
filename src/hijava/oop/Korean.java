@@ -3,12 +3,13 @@ package hijava.oop;
 import hijava.practice.Man;
 
 public class Korean extends Man{
-
 	public Korean(String name) {
-		super(name);
+		this.setName(name);
+	}
+
+	public void eatRice() {
+		System.out.println("밥을 먹습니다.");
 	}
 	
-	public void sayHello() {
-		System.out.println("안녕하세요, 제 이름은 " + this.getName() + "입니다.");
-	}
+	
 }
