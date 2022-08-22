@@ -17,6 +17,11 @@ public class School {
 		System.out.println(korean.prof);
 		System.out.println(math);
 		System.out.println(science);
+		
+		Student s1 = new Student("김일수");
+		s1.setTelno("010-9999-8888");
+		System.out.println(s1.getTelno());
+		       
 	}
 
 }

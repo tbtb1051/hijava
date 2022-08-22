@@ -38,16 +38,16 @@ public class Student {
 		this.age = age;
 	}
 
-	//010-9999-8888
+	//010-9999-8888 => 010-9999-****
 	public String getTelno() {
 		if (this.telno == null || telno.length() < 4) {
 			return telno;
 		} else {
-			return telno.substring(0, telno.length() - 4);
+			return telno.substring(0, telno.length() - 4) + "****";
 		}
 	}
 
-	public void setTelNo(String telno) {
+	public void setTelno(String telno) {
 		this.telno = telno;
 	}
 	
