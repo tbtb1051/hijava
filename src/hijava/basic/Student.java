@@ -1,84 +1,168 @@
 package hijava.basic;
 
-public class Student implements Cloneable{
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+public class Student implements Cloneable, Comparable<Student> {
 	private int id;
 	private String name;
-	
+
+	public Student() {
+		this.name = "Guest";
+	}
+
 	public Student(int id, String name) {
 		this.id = id;
 		this.name = name;
 	}
-	
+
+	@Override
+	public int compareTo(Student o) {
+		System.out.println("comp=" + this.id + "-" + o.id);
+		return this.id - o.id;
+	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	@Override
 	public String toString() {
 		return name + "(" + id + ")";
 	}
-		
+
 	@Override
-	public Object clone() throws CloneNotSupportedException{
-		Student clobj = (Student)super.clone();
-		clobj.name = clobj.name + "복제본!";
+	public Object clone() throws CloneNotSupportedException {
+		Student clobj = (Student) super.clone();
+		clobj.name = clobj.name + " 복제본!";
 		return clobj;
 	}
-	
+
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + id;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
+		return this.id;
 	}
 
-	//s1.equals(s2) // if(s1 != null && s1.equals(s2)) {} 
+	// s1.equals(s2) // if(s1 != null && s1.equals(s2)) {}
 	@Override
 	public boolean equals(Object obj) {
-		//동일한 메모리 주소면 true  (==는 메모리 주소)
-		if (this == obj) 
+		// 동일한 메모리 주소면 true (==는 메모리 주소)
+		if (this == obj)
 			return true;
-		
-		//this는 절대 null이 될 수 없으므로 obj null이면 false
+
+		// this는 절대 null이 될 수 없으므로 obj null이면 false
 		if (obj == null)
 			return false;
-		
+
 		// 동일한 class type이 아니면 false
 		if (getClass() != obj.getClass())
 			return false;
-		
+
 		Student other = (Student) obj;
 		if (this.id != other.id)
 			return false;
-		
+
 		if (this.name == null) {
 			if (other.name != null)
 				return false;
-		
+
 		} else if (!name.equals(other.name))
 			return false;
-		
+
 		return true;
-		
+
 //		Student other = (Student) obj;
 //		return this.id == other.id && this.name != null && this.name.contentEquals(other.name);
 	}
 
-	public static void main(String[] args) throws CloneNotSupportedException {
+	public static void main(String[] args)
+			throws CloneNotSupportedException, ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
 		Student s = new Student(921234, "홍길동");
-		Student s2 = (Student)s.clone();
-		System.out.println(s2);
+//		Student s2 = (Student)s.clone();
+//		System.out.println(s2);
+//		System.out.println(s.getClass() + ", " + s.getClass().getSimpleName());
+
+		String inputStr = "hijava.basic.Student";
+		Class<?> cls = Class.forName(inputStr);
+		Package pkg = cls.getPackage();
+		System.out.println("pkg = " + pkg);
+
+//		for (Constructor c : cls.getConstructors())
+//			System.out.println("constructor = " + c);
+//		for (Field f : cls.getFields())
+//			System.out.println("field = " + f);
+//		for (Method m : cls.getMethods()) {
+//			System.out.println("method = " + m.getName());
+//			if ("getName".contentEquals(m.getName())) {
+//				System.out.println("---------------------------");
+////				m.invoke(null, null);
+//			}
+//		}
+
+		Student newStu = (Student) cls.newInstance();
+//		Student newStu = new Student();
+		System.out.println(newStu);
+		Method setnameMethod = cls.getMethod("setName", String.class);
+		setnameMethod.invoke(newStu, "홍길동");
+		Method getnameMethod = cls.getMethod("getName");
+		Method setidMethod = cls.getDeclaredMethod("setId", int.class);
+		setidMethod.invoke(newStu, 100);
+		System.out.println("newStu.name = " + getnameMethod.invoke(newStu));
+		
+
+//		Student s2 = (Student)cls.newInstance();
+
+//		boolean hasCondition = true;
+//		String searchStr = "홍길동";
+//		String s = "select * from Tbl";
+//		if(hasCondition) {
+//			s = s + "where name like '&" + searchStr + "%";
+//			s += " and id > 0";
+//			s += " limit 10";
+//		}
+//		
+//		StringBuilder sb = new StringBuilder();
+//		sb.append("select * from Tbl");
+//		if(hasCondition) {
+//			sb.append( "where name like '%").append(searchStr).append("%");
+//			sb.append(100).append('T');
+//		}
+
+//		StringBuilder sb = new StringBuilder();
+//		sb.append("aaaaaaaa");
+//		System.out.println("sb1 = " + sb.toString());
+//		sb.setLength(0);
+//		System.out.println("sb2 = " + sb.toString());
+//		
+//		StringBuffer sf = new StringBuffer();
+//		sf.append("aaaaaaaa");
+//		System.out.println("sb1 = " + sf.toString());
+//		sf.setLength(0);
+//		System.out.println("sb2 = " + sf.toString());
+
+//		String s1 = new String("123abc");
+//		String s2 = "123abc";
+//		String s3 = "123abc";
+//		
+//		System.out.println("s1 == s2 :" + (s1 == s2) + ", " + s1.contentEquals(s2));
+//		System.out.println(s3 == s2);
+//		System.out.println(System.identityHashCode(s1) + ", " + System.identityHashCode(s2));
+//		System.out.println(s1.hashCode() + " : " + s2.hashCode() + " : " + s3.hashCode());
+
 //		System.out.println(s);
 //		String ss = new String("홍길동");
 //		Integer obj = new Integer(s.id);
